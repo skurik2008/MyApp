@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователь</title>
+</head>
+<body>
+    <div align="center">
+        <div th:switch="${flag}">
+            <h2 th:case="new">Новый пользователь</h2>
+            <h2 th:case="edit">Редактировать пользователя</h2>
+        </div>
+        <form th:method="post" th:action="@{/user_save}" th:object="${user}">
+
+            <input type="hidden" th:field="*{id}" id="id">
+
+            <label for="name">Имя: </label>
+            <input type="text" th:field="*{name}" id="name">
+<br><br/>
+            <label for="age">Возраст: </label>
+            <input type="number" max="127" min="1" th:field="*{age}" id="age">
+<br><br/>
+            <label for="city">Город: </label>
+            <input type="text" th:field="*{city}" id="city">
+<br><br/>
+            <label for="phone">Телефон: </label>
+            <input type="text" th:field="*{phone}" id="phone">
+<br><br/>
+            <input type="submit" value="Сохранить">
+        </form>
+    </div>
+</body>
+</html>
