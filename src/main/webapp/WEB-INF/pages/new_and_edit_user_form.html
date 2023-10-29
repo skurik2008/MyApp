@@ -10,27 +10,19 @@
 <body>
     <div align="center">
         <div th:switch="${flag}">
-            <h2 th:case="new">Новый пользователь</h2>
-            <h2 th:case="edit">Редактировать пользователя</h2>
+            <div th:case="new">
+                <h2>Новый пользователь</h2>
+                <form th:method="POST" th:action="@{/user_save}" th:object="${user}" >
+                    <div th:replace="/includes/form_fragment"></div>
+                </form>
+            </div>
+            <div th:case="edit">
+                <h2>Редактировать пользователя</h2>
+                <form th:method="PATCH" th:action="@{/update_user}" th:object="${user}" >
+                    <div th:replace="/includes/form_fragment"></div>
+                </form>
+            </div>
         </div>
-        <form th:method="post" th:action="@{/user_save}" th:object="${user}">
-
-            <input type="hidden" th:field="*{id}" id="id">
-
-            <label for="name">Имя: </label>
-            <input type="text" th:field="*{name}" id="name">
-<br><br/>
-            <label for="age">Возраст: </label>
-            <input type="number" max="127" min="1" th:field="*{age}" id="age">
-<br><br/>
-            <label for="city">Город: </label>
-            <input type="text" th:field="*{city}" id="city">
-<br><br/>
-            <label for="phone">Телефон: </label>
-            <input type="text" th:field="*{phone}" id="phone">
-<br><br/>
-            <input type="submit" value="Сохранить">
-        </form>
     </div>
 </body>
 </html>

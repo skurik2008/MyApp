@@ -25,9 +25,13 @@
             <td th:text="${user.getCity()}"></td>
             <td th:text="${user.getPhone()}"></td>
             <td>
-                <a th:href="@{/edit_user?id={id}(id=${user.getId})}">Изменить</a>
-                <a th:href="@{/delete?id={id}(id=${user.getId()})}">Удалить</a>
-
+                <form th:method="GET" th:action="@{/edit_user}">
+                    <input type="hidden" name="id" th:value="${user.getId()}">
+                    <input type="submit" value="Изменить"/>
+                </form>
+                <form th:method="DELETE" th:action="@{/delete?id={id}(id=${user.getId()})}">
+                    <input type="submit" value="Удалить"/>
+                </form>
             </td>
         </tr>
     </table>

@@ -1,14 +1,11 @@
 package myweb.dao;
 
 import myweb.model.User;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.stereotype.Repository;
 import javax.persistence.*;
 import java.util.List;
 
-@Component
-@Transactional(readOnly = true)
+@Repository
 public class UserDaoImpl implements UserDao {
 
     @PersistenceContext(unitName = "emf")
@@ -21,14 +18,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void addUser(User user) {
-        System.out.println(user);
-        if (user.getId() == null) {
-            entityManager.persist(user);
-        } else {
-            entityManager.merge(user);
-        }
+        entityManager.persist(user);
     }
 
     @Override
@@ -37,8 +28,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void deleteUser(Long id) {
         entityManager.remove(entityManager.find(User.class, id));
+    }
+
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 }

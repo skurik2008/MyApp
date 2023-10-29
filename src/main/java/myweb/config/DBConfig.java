@@ -22,8 +22,10 @@ import java.util.Properties;
 public class DBConfig {
 
     private final Environment env;
+
     @Autowired
     public DBConfig(Environment env) {this.env = env;}
+
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
